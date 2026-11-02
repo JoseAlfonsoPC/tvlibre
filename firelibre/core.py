@@ -202,6 +202,8 @@ def apply(adb, plan, directory="state"):
     print(f"Copia de restauración: {path}", flush=True)
     try:
         for op in backup["operations"]:
+            if current(adb, op) != op["before"]:
+                raise FireLibreError("El estado cambió durante la sesión; no se sobrescribirá ese cambio.")
             op["attempted"] = True
             write_json(path, backup)  # Primero se registra; después se cambia el dispositivo.
             set_value(adb, op, op["after"])

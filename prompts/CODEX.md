@@ -40,7 +40,7 @@ PROCEDIMIENTO
 3. Si el modelo requiere --experimental, termina el diagnóstico y explícame ese límite.
    No actives el modo experimental sin una petición explícita mía.
 4. Genera el plan con el perfil indicado y mis paquetes conservados. Resume las
-   operaciones previstas, revísalas frente a perfiles/protegidos y aplícalas con --yes
+   operaciones previstas, revísalas frente a profiles/protegidos.json y aplícalas con --yes
    dentro de la autorización anterior. No inventes órdenes ni paquetes nuevos.
 5. Conserva todas las rutas de backup.json. Si hay error, no ocultes el fallo ni pases
    a cambios más agresivos; recupera lo necesario o indica la restauración concreta.

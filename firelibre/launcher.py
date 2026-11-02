@@ -190,11 +190,15 @@ def reboot_check(adb, experimental=False):
             if adb.shell("cat", "/proc/sys/kernel/random/boot_id") == previous:
                 continue
             # Primero se observa: no se abre Home ni se inyecta ninguna tecla.
-            foreground = adb.foreground()
-            if not foreground or not foreground.startswith(core.PACKAGE + "/"):
+            first = adb.foreground()
+            foreground = first
+            for _ in range(10):
+                if foreground and foreground.startswith(core.PACKAGE + "/"):
+                    break
                 time.sleep(2)
                 foreground = adb.foreground()
-            return {"boot_changed": True, "foreground_before_any_launch": foreground,
+            return {"boot_changed": True, "first_foreground_observed": first,
+                    "foreground_before_any_launch": foreground,
                     "autostart": bool(foreground and foreground.startswith(core.PACKAGE + "/"))}
         except FireLibreError:
             continue

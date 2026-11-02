@@ -161,6 +161,19 @@ class Plans(unittest.TestCase):
         with self.assertRaises(FireLibreError):
             core.validate([])
 
+    def test_mid_session_drift_is_preserved(self):
+        plan = core.make_plan(self.tv)
+        original = core.set_value
+
+        def write_and_drift(adb, op, value):
+            original(adb, op, value)
+            adb.values["secure"]["amz_limit_ad_tracking"] = "new-user-choice"
+
+        with patch.object(core, "set_value", side_effect=write_and_drift):
+            with self.assertRaises(FireLibreError):
+                core.apply(self.tv, plan, self.temp.name)
+        self.assertEqual(self.tv.values["secure"]["amz_limit_ad_tracking"], "new-user-choice")
+
     def test_launcher_roundtrip_preserves_reader_alarm_and_battery_state(self):
         before = copy.deepcopy(self.tv.values)
         plan = launcher.activation_plan(self.tv)
@@ -233,6 +246,18 @@ class ParsingAndTransport(unittest.TestCase):
         plan["operations"].append({"kind": "arbitrary-shell", "command": "rm -rf /"})
         with self.assertRaises(FireLibreError):
             core.validate(plan)
+
+    def test_reboot_observes_autostart_without_launching_or_pressing_home(self):
+        tv = FakeTV()
+        tv.connect = lambda: None
+        tv.run = lambda *args, **kwargs: None
+        tv.foreground = unittest.mock.Mock(side_effect=["com.amazon.tv.launcher/.Home", core.PACKAGE + "/.Home"])
+        tv.shell = unittest.mock.Mock(side_effect=["boot-before", "", "1", "boot-after"])
+        with patch("time.sleep"):
+            result = launcher.reboot_check(tv)
+        self.assertTrue(result["autostart"])
+        self.assertEqual(result["first_foreground_observed"], "com.amazon.tv.launcher/.Home")
+        self.assertFalse(any(c.args[0] in ("am", "input") for c in tv.shell.call_args_list))
 
 
 if __name__ == "__main__":
