@@ -1,0 +1,29 @@
+name: Registrar un dispositivo
+description: Evidencia de compatibilidad, sin datos privados
+title: "Dispositivo: "
+body:
+  - type: markdown
+    attributes:
+      value: "Indica solo modelo, versión y pruebas. No publiques identificadores ni copias."
+  - type: input
+    id: model
+    attributes:
+      label: Modelo / nombre comercial
+    validations:
+      required: true
+  - type: input
+    id: firmware
+    attributes:
+      label: SDK, firmware y versión FireLibre
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Perfil, aplicación, restauración, Home físico y reinicio comprobados
+    validations:
+      required: true
+  - type: textarea
+    id: functions
+    attributes:
+      label: Reproducción, voz, casting, red y limitaciones reales

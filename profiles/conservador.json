@@ -1,0 +1,88 @@
+{
+  "name": "conservador",
+  "description": "Métricas y ACR; conserva compras, tutoriales, avisos y animaciones",
+  "packages": [
+    {
+      "id": "com.amazon.client.metrics.api",
+      "reason": "API de métricas"
+    },
+    {
+      "id": "com.amazon.dp.logger",
+      "reason": "Registro de diagnóstico"
+    },
+    {
+      "id": "com.amazon.hybridadidservice",
+      "reason": "Identificador publicitario"
+    },
+    {
+      "id": "com.amazon.perfc",
+      "reason": "Diagnóstico de rendimiento"
+    },
+    {
+      "id": "com.amazon.perfcollection",
+      "reason": "Recopilación de rendimiento"
+    },
+    {
+      "id": "com.amazon.tv.acr",
+      "reason": "Reconocimiento automático de contenido (ACR)"
+    },
+    {
+      "id": "com.amazon.tv.fw.metrics",
+      "reason": "Métricas del framework de TV"
+    },
+    {
+      "id": "com.amazon.wirelessmetrics.service",
+      "reason": "Métricas de conexión inalámbrica"
+    }
+  ],
+  "settings": [
+    {
+      "namespace": "secure",
+      "key": "amz_limit_ad_tracking",
+      "value": "1",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "limit_ad_tracking",
+      "value": "1",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "non_amz_limit_ad_tracking",
+      "value": "1",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "advertisingIdApp:interestBasedAds:value",
+      "value": "0",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "USAGE_METRICS_UPLOAD_ENABLED",
+      "value": "0",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "usage_metrics_marketing_enabled",
+      "value": "0",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "settingsApp:appUsageData:value",
+      "value": "0",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "settingsApp:deviceUsageData:value",
+      "value": "0",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    }
+  ]
+}

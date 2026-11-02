@@ -1,0 +1,22 @@
+# Datos privados y estado local
+state/
+work/
+dist/
+backup/
+report/
+shots/
+*.local.json
+*.local.env
+adbkey*
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+# Compilaciones y claves: nunca se publican en Git
+*.apk
+*.keystore
+*.jks
+*.p12
+integrations/dumbtv/build/
+

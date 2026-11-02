@@ -1,0 +1,29 @@
+name: Informar de un error
+description: Fallo reproducible del motor o de una integración
+title: "Error: "
+body:
+  - type: markdown
+    attributes:
+      value: "No adjuntes state/, claves, IP, cuentas, Wi-Fi, MAC ni números de serie."
+  - type: input
+    id: version
+    attributes:
+      label: Versión FireLibre
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Modelo, SDK y firmware
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Pasos y resultado esperado/obtenido
+    validations:
+      required: true
+  - type: textarea
+    id: recovery
+    attributes:
+      label: Resultado de verificar o restaurar y errores resumidos

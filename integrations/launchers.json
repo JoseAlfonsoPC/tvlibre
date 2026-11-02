@@ -1,0 +1,54 @@
+[
+  {
+    "id": "dumbtv-es",
+    "name": "dumbtv Home en español",
+    "mode": "integrado",
+    "package": "tv.dumbtv.home",
+    "source": "https://github.com/humblemuzzu/dumbtv",
+    "version": "1.6-es",
+    "apk_url": "https://github.com/JoseAlfonsoPC/firelibre/releases/download/v0.1.0/dumbtv-home-1.6-es.apk",
+    "sha256": "85f6b36cf0cd7a65c314b63685116e58ff9a93f8f60f257f55ce75b5ddd096df",
+    "note": "Traducción local MIT; firma diferente de la versión oficial. Home depende del firmware."
+  },
+  {
+    "id": "dumbtv-oficial",
+    "name": "dumbtv Home oficial",
+    "mode": "integrado",
+    "package": "tv.dumbtv.home",
+    "source": "https://github.com/humblemuzzu/dumbtv",
+    "version": "1.6",
+    "apk_url": "https://github.com/humblemuzzu/dumbtv/releases/download/launcher-v1.6/dumbtv-home.apk",
+    "sha256": "9e0f95ed141a980295eba0649ee2f7d1d8b49eacced31246bd2445d92954fdd9",
+    "note": "Versión fijada de origen; no se cambia automáticamente a latest."
+  },
+  {
+    "id": "projectivy",
+    "name": "Projectivy Launcher",
+    "mode": "guía manual",
+    "package": "com.spocky.projengmenu",
+    "source": "https://github.com/spocky/miproja1",
+    "note": "Personalización amplia; funciones y licencia propias. No se redistribuye su APK."
+  },
+  {
+    "id": "cleanyourtv",
+    "name": "CleanYourTV Home",
+    "mode": "referencia externa",
+    "package": "com.gathin.tvhome",
+    "source": "https://github.com/Gathin23/cleanyourtv",
+    "note": "Interfaz para Android TV/Google TV. Su integración Fire TV se limita a la limpieza según su documentación."
+  },
+  {
+    "id": "flauncher",
+    "name": "FLauncher",
+    "mode": "referencia externa",
+    "source": "https://gitlab.com/flauncher/flauncher",
+    "note": "Alternativa de código abierto para Android TV; Home en Fire TV no verificado aquí."
+  },
+  {
+    "id": "leanback-on-fire",
+    "name": "Leanback on Fire",
+    "mode": "referencia externa",
+    "source": "https://github.com/tsynik/LeanbackLauncher",
+    "note": "Proyecto orientado a Fire TV. Revisar actividad, versión y compatibilidad antes de instalar."
+  }
+]

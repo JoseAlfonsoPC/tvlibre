@@ -1,0 +1,59 @@
+name: Comprobaciones
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    name: Python ${{ matrix.python }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.10', '3.13']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Pruebas sin dispositivo real
+        run: python -m unittest discover -s tests
+      - name: Perfiles, enlaces y traducciones
+        run: python scripts/check_repo.py
+      - name: Sintaxis Python
+        run: python -m compileall -q firelibre firelibre.py scripts tests
+
+  launcher:
+    name: Compilación Android y scripts Bash
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Revisar sintaxis Bash
+        run: |
+          for script in scripts/*.sh integrations/dumbtv/build.sh; do
+            bash -n "$script"
+          done
+      - name: Instalar plataforma de compilación
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-25" "build-tools;36.0.0"'
+      - name: Compilar y verificar firma temporal
+        run: bash scripts/build-launcher.sh
+      - name: Verificar ausencia de permiso de internet
+        run: |
+          if "$ANDROID_HOME/build-tools/36.0.0/aapt2" dump permissions dist/dumbtv-home-1.6-es.apk | grep -q android.permission.INTERNET; then
+            exit 1
+          fi
+      # La clave temporal y este APK no se publican como release.

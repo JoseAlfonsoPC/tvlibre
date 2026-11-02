@@ -1,0 +1,218 @@
+{
+  "name": "equilibrado",
+  "description": "Lista ampliada basada en la configuración real del AFTSSS; revisar el plan completo",
+  "packages": [
+    {
+      "id": "com.amazon.ale",
+      "reason": "Componente auxiliar de experiencias de Amazon; perfil ampliado"
+    },
+    {
+      "id": "com.amazon.ceviche",
+      "reason": "Recopilación de datos de Amazon"
+    },
+    {
+      "id": "com.amazon.client.metrics.api",
+      "reason": "API de métricas"
+    },
+    {
+      "id": "com.amazon.connectivitydiag",
+      "reason": "Diagnóstico de conectividad"
+    },
+    {
+      "id": "com.amazon.dp.logger",
+      "reason": "Registro de diagnóstico"
+    },
+    {
+      "id": "com.amazon.dummy.alarmclock",
+      "reason": "App de relleno alarmclock"
+    },
+    {
+      "id": "com.amazon.dummy.calendar",
+      "reason": "App de relleno calendar"
+    },
+    {
+      "id": "com.amazon.dummy.contacts",
+      "reason": "App de relleno contacts"
+    },
+    {
+      "id": "com.amazon.dummy.gallery",
+      "reason": "App de relleno gallery"
+    },
+    {
+      "id": "com.amazon.dummy.music",
+      "reason": "App de relleno music"
+    },
+    {
+      "id": "com.amazon.dummy.settings",
+      "reason": "App de relleno settings"
+    },
+    {
+      "id": "com.amazon.hybridadidservice",
+      "reason": "Identificador publicitario"
+    },
+    {
+      "id": "com.amazon.katoch",
+      "reason": "Componente auxiliar de Amazon; función no documentada públicamente"
+    },
+    {
+      "id": "com.amazon.kso.blackbird",
+      "reason": "Contenido promocional"
+    },
+    {
+      "id": "com.amazon.livedeviceservice",
+      "reason": "Datos de interacción de dispositivos; validar las funciones usadas"
+    },
+    {
+      "id": "com.amazon.perfc",
+      "reason": "Diagnóstico de rendimiento"
+    },
+    {
+      "id": "com.amazon.perfcollection",
+      "reason": "Recopilación de rendimiento"
+    },
+    {
+      "id": "com.amazon.privacypassservice",
+      "reason": "Servicio de datos de privacidad del fabricante"
+    },
+    {
+      "id": "com.amazon.providers.contentsupport",
+      "reason": "Soporte de contenido recomendado"
+    },
+    {
+      "id": "com.amazon.shoptv.client",
+      "reason": "Compras desde el televisor"
+    },
+    {
+      "id": "com.amazon.shoptv.firetv.client",
+      "reason": "Compras desde Fire TV"
+    },
+    {
+      "id": "com.amazon.sneakpeek",
+      "reason": "Vista previa y recomendaciones"
+    },
+    {
+      "id": "com.amazon.storm.lightning.tutorial",
+      "reason": "Tutorial de la interfaz"
+    },
+    {
+      "id": "com.amazon.systemnotices",
+      "reason": "Avisos de Amazon"
+    },
+    {
+      "id": "com.amazon.tigris",
+      "reason": "Componente auxiliar de Amazon; función no documentada públicamente"
+    },
+    {
+      "id": "com.amazon.tmm.tutorial",
+      "reason": "Tutorial de administración de tareas"
+    },
+    {
+      "id": "com.amazon.tv.acr",
+      "reason": "Reconocimiento automático de contenido (ACR)"
+    },
+    {
+      "id": "com.amazon.tv.developer.dataservice",
+      "reason": "Datos y diagnóstico para desarrolladores"
+    },
+    {
+      "id": "com.amazon.tv.fw.metrics",
+      "reason": "Métricas del framework de TV"
+    },
+    {
+      "id": "com.amazon.tv.releasenotes",
+      "reason": "Notas de novedades del sistema"
+    },
+    {
+      "id": "com.amazon.wifilocker",
+      "reason": "Componente Wi-Fi auxiliar; validar la conexión tras el cambio"
+    },
+    {
+      "id": "com.amazon.wirelessmetrics.service",
+      "reason": "Métricas de conexión inalámbrica"
+    },
+    {
+      "id": "com.android.traceur",
+      "reason": "Registro de trazas del sistema"
+    }
+  ],
+  "settings": [
+    {
+      "namespace": "secure",
+      "key": "amz_limit_ad_tracking",
+      "value": "1",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "limit_ad_tracking",
+      "value": "1",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "non_amz_limit_ad_tracking",
+      "value": "1",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "advertisingIdApp:interestBasedAds:value",
+      "value": "0",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "USAGE_METRICS_UPLOAD_ENABLED",
+      "value": "0",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "usage_metrics_marketing_enabled",
+      "value": "0",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "settingsApp:appUsageData:value",
+      "value": "0",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "secure",
+      "key": "settingsApp:deviceUsageData:value",
+      "value": "0",
+      "reason": "Limitar indicadores de publicidad y recopilación; revisar también los menús de Amazon"
+    },
+    {
+      "namespace": "global",
+      "key": "heads_up_notifications_enabled",
+      "value": "0",
+      "reason": "Ocultar avisos flotantes; no equivale a desactivar todas las notificaciones"
+    },
+    {
+      "namespace": "global",
+      "key": "com.amazon.tv.settings.featured_item_video_enabled",
+      "value": "0",
+      "reason": "Desactivar reproducción automática de contenido destacado"
+    },
+    {
+      "namespace": "global",
+      "key": "com.amazon.tv.settings.featured_item_video_volume",
+      "value": "0.0",
+      "reason": "Desactivar reproducción automática de contenido destacado"
+    },
+    {
+      "namespace": "global",
+      "key": "window_animation_scale",
+      "value": "0.5",
+      "reason": "Reducir la duración de esta animación a 0,5"
+    },
+    {
+      "namespace": "global",
+      "key": "transition_animation_scale",
+      "value": "0.5",
+      "reason": "Reducir la duración de esta animación a 0,5"
+    }
+  ]
+}

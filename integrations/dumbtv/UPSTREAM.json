@@ -1,0 +1,13 @@
+{
+  "project": "dumbtv",
+  "url": "https://github.com/humblemuzzu/dumbtv",
+  "commit": "755991b17a66e753e82f7252368c8850c08fdc71",
+  "version": "1.6",
+  "local_version": "1.6-es",
+  "changes": [
+    "Recursos Android en español y extracción de textos de Java a recursos",
+    "Código de versión 8 y nombre de versión 1.6-es"
+  ],
+  "license": "MIT",
+  "package": "tv.dumbtv.home"
+}
