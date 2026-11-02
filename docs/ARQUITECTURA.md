@@ -28,7 +28,7 @@ tvlibre/
 ├── prompts/                    Configurar, revisar y restaurar con Codex
 ├── tests/                      Simulador y pruebas de fallos/recuperación
 ├── .github/                    CI y plantillas
-└── state/                      Estado privado, excluido de Git
+└── state/                      Planes y registros de sesiones
 ```
 
 ## Planes y política
@@ -42,9 +42,8 @@ claves y valores permitidos. Los argumentos de ADB se envían como lista al proc
 del shell remoto se componen con `shlex.join`. No se ejecutan órdenes de shell arbitrarias
 incluidas en un JSON.
 
-La identidad local es un hash de un identificador estable leído del equipo. No es una
-autenticación criptográfica del hardware ni hace anónimos los inventarios. La autorización
-de transporte depende de ADB. Las copias no deben publicarse.
+El motor compara un hash de un identificador estable del equipo para comprobar que el plan
+y la copia de restauración corresponden al dispositivo conectado.
 
 ## Diario e interrupciones
 

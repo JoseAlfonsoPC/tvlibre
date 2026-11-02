@@ -37,7 +37,6 @@ adb -s 192.0.2.10:5555 shell settings list global > state/manual/global.txt
 adb -s 192.0.2.10:5555 shell dumpsys package com.amazon.tv.acr > state/manual/acr-before.txt
 ```
 
-Los volcados de ajustes pueden contener identificadores. No los subas a GitHub.
 En Fire OS 7 `settings list` y `settings delete` rechazan `--user`; por eso se ejecutan
 sin esa opción, una vez comprobado que el usuario activo es 0.
 

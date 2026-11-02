@@ -41,7 +41,7 @@ python3 tvlibre.py --serial 192.0.2.10:5555 doctor --out state/doctor.json
 python3 tvlibre.py --serial 192.0.2.10:5555 inventory --out state/inventory.json
 ```
 
-Estos archivos son privados. El diagnóstico puede funcionar en equipos que **no** tienen
+El diagnóstico puede funcionar en equipos que **no** tienen
 autorizada la limpieza. No confundas tener ADB con ser un modelo validado.
 
 ## 4. Revisar el plan

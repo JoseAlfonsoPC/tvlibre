@@ -11,18 +11,16 @@
 
 **Menos ruido. Más control. Tu televisor, a tu manera.**
 
-TVLibre es un proyecto de **JoseAlfonsoPC** con herramientas y guías para televisores y
-reproductores con Android: **Fire TV, Android TV, Google TV y Chromecast con Google TV**.
-Su objetivo es reducir ruido y recopilación de datos, conservar las funciones habituales y
-elegir un inicio sencillo. Las guías y los mensajes propios están en español.
+TVLibre reúne herramientas y guías en español para **Fire TV, Android TV, Google TV y
+Chromecast con Google TV**: diagnóstico, limpieza de componentes, ajustes de privacidad y
+launchers sencillos.
 
 Cada plataforma tiene su recorrido: en esta versión el motor de limpieza automatizada es
 específico de Fire TV. Android TV y Google TV disponen de diagnóstico ADB y una
-[guía con integraciones externas](docs/ANDROID-TV-Y-GOOGLE-TV.md); no heredan los paquetes de Amazon.
+[guía con integraciones externas](docs/ANDROID-TV-Y-GOOGLE-TV.md).
 
-Incluye un motor propio en Python sin dependencias de pip y la integración de **dumbtv Home
-en español**, con su código fuente y créditos originales. Puedes trabajar con una guía manual
-o dejar que Codex siga un procedimiento verificable.
+Incluye una CLI Python sin dependencias de pip y **dumbtv Home en español**. Puedes seguir
+la guía manual o utilizar el prompt para configurar el dispositivo con Codex.
 
 **Versión inicial 0.1.0.** La lista de referencia y dumbtv se comprobaron en un Fire TV Stick
 de 3.ª generación **AFTSSS, Fire OS 7 / Android 9**. El motor nuevo tiene pruebas de simulación
@@ -109,17 +107,7 @@ La limpieza no instala ni cambia el launcher automáticamente.
 
 La matriz detallada separa [soporte de compilación, funcionamiento y pruebas](docs/COMPATIBILIDAD.md).
 
-## Un proyecto propio, con origen transparente
+## Documentación técnica
 
-TVLibre reúne las ideas de diagnóstico por ADB, cambios reversibles y un inicio mínimo en una
-herramienta nueva. Reconoce el trabajo de [CleanYourTV](https://github.com/Gathin23/cleanyourtv),
-[dumbtv](https://github.com/humblemuzzu/dumbtv) y la
-[guía de JLCareglio](https://gist.github.com/JLCareglio/881ab7feaa8013f838bec02c706b47a3).
-El launcher integrado es una adaptación de dumbtv, no una creación desde cero de TVLibre.
-
-[Origen y decisiones](docs/ORIGEN.md) · [Créditos y licencias](THIRD_PARTY_NOTICES.md) ·
 [Arquitectura](docs/ARQUITECTURA.md) · [Desarrollo](CONTRIBUTING.md) · [Cambios](CHANGELOG.md) ·
-[Seguridad](SECURITY.md) · [Preguntas frecuentes](docs/FAQ.md)
-
-No se publican tus copias, IP, claves ADB, identificadores del dispositivo ni cuentas.
-`state/`, compilaciones y claves de firma están excluidos de Git.
+[Preguntas frecuentes](docs/FAQ.md) · [Licencias](THIRD_PARTY_NOTICES.md)

@@ -2,9 +2,8 @@
 
 [Índice](../README.md) · [Compatibilidad](COMPATIBILIDAD.md) · [Launchers](LAUNCHERS.md)
 
-TVLibre tiene un nombre general porque reúne recorridos para varias familias. Las
-herramientas de una plataforma no se aplican automáticamente a otra: los perfiles actuales
-de limpieza contienen paquetes de Amazon y solo se ejecutan en Fire TV.
+En Android TV y Google TV puedes utilizar el diagnóstico ADB y las integraciones de esta
+guía. Los perfiles de limpieza incluidos en TVLibre 0.1 son específicos de Fire TV.
 
 ## Identificar el dispositivo
 
@@ -38,7 +37,7 @@ python3 tvlibre.py --serial 192.0.2.10:5555 doctor --out state/doctor.json
 python3 tvlibre.py --serial 192.0.2.10:5555 inventory --out state/inventory.json
 ```
 
-Estos comandos no cambian ajustes ni apps. Los resultados son privados. El bloqueo del
+Estos comandos no cambian ajustes ni apps. El bloqueo del
 comando `plan` en plataformas sin perfil no indica que la conexión haya fallado: expresa
 el alcance del motor actual. `--experimental` no convierte una lista de Fire TV en una
 lista válida de Android TV o Google TV.
@@ -55,8 +54,7 @@ lista válida de Android TV o Google TV.
 - **dumbtv:** el código integrado se centra en Fire TV. No se presenta su servicio Guard
   como sustituto universal de Home para cualquier televisor.
 
-Las referencias externas son proyectos independientes. TVLibre 0.1 no ejecuta sus scripts
-como un paso oculto ni declara sus dispositivos probados como pruebas propias.
+Sigue las instrucciones y la recuperación de cada herramienta para tu modelo.
 
 ## Comprobar un nuevo modelo
 
@@ -65,6 +63,4 @@ Play Store/servicios requeridos, actualizaciones y receptor Cast si lo utilizas.
 comprueba Home físico, reinicio, reproducción, voz y envío de contenido desde otro dispositivo.
 
 Para aportar compatibilidad, indica modelo, Android SDK, firmware, herramienta usada,
-cambios exactos y qué se restauró y probó. Usa la [plantilla de dispositivo](../.github/ISSUE_TEMPLATE/dispositivo.yml)
-sin publicar identificadores. Añadir soporte automatizado requiere un perfil específico y
-pruebas; cambiar el nombre del repositorio no equivale a certificar esos equipos.
+cambios exactos y qué se restauró y probó. Usa la [plantilla de dispositivo](../.github/ISSUE_TEMPLATE/dispositivo.yml).

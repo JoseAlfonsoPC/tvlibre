@@ -35,11 +35,6 @@ Instalar un launcher no garantiza capturar Home. Comprueba que Guard esté vincu
 Identifica el modelo y SDK con `doctor`. El AFTSSS Android 9 es la referencia; otros productos
 con nombres parecidos pueden llevar otro Android o Vega OS. Consulta [Compatibilidad](COMPATIBILIDAD.md).
 
-## ¿Por qué el launcher sigue llamándose dumbtv?
-
-Porque es su código y conserva su autoría. TVLibre aporta el proyecto, las herramientas y
-la traducción. Las aplicaciones externas y sus logotipos mantienen sus nombres originales.
-
 ## ¿Por qué no se actualiza la traducción encima de la versión oficial?
 
 Las firmas son distintas. Android impide ese reemplazo sin desinstalar. TVLibre se detiene
