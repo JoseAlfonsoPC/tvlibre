@@ -6,7 +6,7 @@
     "package": "tv.dumbtv.home",
     "source": "https://github.com/humblemuzzu/dumbtv",
     "version": "1.6-es",
-    "apk_url": "https://github.com/JoseAlfonsoPC/tvlibre/releases/download/v0.1.0/dumbtv-home-1.6-es.apk",
+    "apk_url": "https://github.com/NeXoDevLab/tvlibre/releases/download/v0.1.0/dumbtv-home-1.6-es.apk",
     "sha256": "85f6b36cf0cd7a65c314b63685116e58ff9a93f8f60f257f55ce75b5ddd096df",
     "note": "Traducción local MIT; firma diferente de la versión oficial. Home depende del firmware."
   },

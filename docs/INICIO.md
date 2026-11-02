@@ -10,7 +10,7 @@ Google TV o Google TV Streamer, comienza en la [guía de su plataforma](ANDROID-
 - macOS/Linux: Python 3.10+ como `python3`. Windows: Python 3.10+ como `python`.
 - Instala [Platform Tools de Android](https://developer.android.com/tools/releases/platform-tools)
   y añade su carpeta a PATH. Comprueba `adb version`.
-- `git clone https://github.com/JoseAlfonsoPC/tvlibre.git` y entra en `tvlibre`.
+- `git clone https://github.com/NeXoDevLab/tvlibre.git` y entra en `tvlibre`.
 - No necesitas `pip`, root, un cable USB ni modificar el sistema de archivos del TV.
 
 Ejecuta los ejemplos desde la raíz del repositorio. El wrapper `scripts/tvlibre.sh` o

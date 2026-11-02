@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/licencia-MIT-35c6a0" alt="Licencia MIT"></a>
-  <a href="https://github.com/JoseAlfonsoPC/tvlibre/actions/workflows/ci.yml"><img src="https://github.com/JoseAlfonsoPC/tvlibre/actions/workflows/ci.yml/badge.svg" alt="Pruebas"></a>
+  <a href="https://github.com/NeXoDevLab/tvlibre/actions/workflows/ci.yml"><img src="https://github.com/NeXoDevLab/tvlibre/actions/workflows/ci.yml/badge.svg" alt="Pruebas"></a>
   <img src="https://img.shields.io/badge/idioma-español-4c8dff" alt="Español">
   <img src="https://img.shields.io/badge/Python-3.10+-4c8dff" alt="Python 3.10 o posterior">
 </p>
@@ -66,7 +66,7 @@ un ordenador en la misma red y ADB autorizado en el televisor. Sustituye siempre
 por la IP real de **tu** dispositivo. La dirección del ejemplo está reservada para documentación.
 
 ```bash
-git clone https://github.com/JoseAlfonsoPC/tvlibre.git
+git clone https://github.com/NeXoDevLab/tvlibre.git
 cd tvlibre
 adb connect 192.0.2.10:5555
 python3 tvlibre.py --serial 192.0.2.10:5555 doctor
