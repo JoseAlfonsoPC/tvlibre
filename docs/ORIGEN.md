@@ -2,7 +2,7 @@
 
 [Índice](../README.md) · [Licencias](../THIRD_PARTY_NOTICES.md)
 
-FireLibre es un repositorio propio de **JoseAlfonsoPC**, con motor, interfaz de terminal,
+TVLibre es un repositorio propio de **JoseAlfonsoPC**, con motor, interfaz de terminal,
 flujo de recuperación, perfiles y documentación organizados para usuarios de habla española.
 Su desarrollo parte de una experiencia real configurando dos generaciones distintas de Fire TV.
 
@@ -16,13 +16,13 @@ Su desarrollo parte de una experiencia real configurando dos generaciones distin
 
 ## Qué es propio y qué sigue siendo de sus autores
 
-El motor `firelibre/`, los comandos, la documentación en español, las pruebas y la identidad
-de FireLibre pertenecen a este proyecto bajo MIT. Las listas de paquetes y ajustes se basan
+El motor `tvlibre/`, los comandos, la documentación en español, las pruebas y la identidad
+de TVLibre pertenecen a este proyecto bajo MIT. Las listas de paquetes y ajustes se basan
 en las dos guías de código abierto y en la configuración de referencia documentada.
 
 El código Java del launcher es **dumbtv**, con modificaciones locales para recursos en español.
 Mantiene el paquete `tv.dumbtv.home`, la estructura y la licencia originales. Su autoría no se
-reemplaza por el nombre FireLibre. Las modificaciones están descritas en
+reemplaza por el nombre TVLibre. Las modificaciones están descritas en
 [`UPSTREAM.json`](../integrations/dumbtv/UPSTREAM.json).
 
 No se ha copiado el texto completo ni un script del gist como código propio. Se enlaza como
@@ -50,5 +50,5 @@ personalDNSfilter, FLauncher o Leanback on Fire.
 | dumbtv | `755991b17a66e753e82f7252368c8850c08fdc71`, launcher 1.6 |
 | Guía JLCareglio | Consulta del enlace público el 2 de noviembre de 2026; sin copiar su contenido íntegro |
 
-Los proyectos originales evolucionan de forma independiente. FireLibre no se presenta como
+Los proyectos originales evolucionan de forma independiente. TVLibre no se presenta como
 versión oficial, sucesor autorizado ni soporte de Amazon, OpenAI o esos proyectos.

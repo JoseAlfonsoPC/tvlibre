@@ -2,6 +2,10 @@
 
 [Índice](../README.md) · [Inicio con scripts](INICIO.md) · [Restauración](RESTAURACION.md)
 
+**Los cambios de paquetes y ajustes de este manual son para Fire TV.** Para Android TV y
+Google TV sigue la [guía correspondiente](ANDROID-TV-Y-GOOGLE-TV.md). No apliques paquetes
+Amazon a otro sistema ni sustituyas sus nombres por candidatos que solo parezcan equivalentes.
+
 Esta guía explica las operaciones. El motor Python guarda y comprueba el estado con mayor
 detalle que una secuencia pegada en terminal. Si eliges trabajar a mano, guarda cada valor
 anterior y su orden; un comando `enable` general no recupera todos los estados originales.
@@ -17,7 +21,7 @@ adb -s 192.0.2.10:5555 shell am get-current-user
 ```
 
 Acepta la autorización en pantalla. Usa siempre `-s`; podrías tener también un teléfono
-conectado. Si el usuario activo no es 0, el flujo de cambios de FireLibre se detiene.
+conectado. Si el usuario activo no es 0, el flujo de cambios de TVLibre se detiene.
 
 ## Guardar el estado inicial
 
@@ -100,4 +104,4 @@ licencias, voz o servicios del sistema.
 
 Comprueba arranque, Home, mando, volumen, red y Ajustes. Reproduce contenido real en las apps
 que utilizas y prueba Alexa/duplicación si las mantienes. No atribuyas una mejora de velocidad
-o consumo a la limpieza sin una medición antes/después. FireLibre no publica cifras de ese tipo.
+o consumo a la limpieza sin una medición antes/después. TVLibre no publica cifras de ese tipo.

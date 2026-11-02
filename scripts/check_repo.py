@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from firelibre import core  # noqa: E402
+from tvlibre import core  # noqa: E402
 
 
 def main():

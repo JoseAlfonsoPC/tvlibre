@@ -1,17 +1,20 @@
-# Empezar con FireLibre
+# Empezar con TVLibre
 
 [Volver al índice](../README.md) · [Compatibilidad](COMPATIBILIDAD.md) · [Manual ADB](MANUAL.md)
+
+Este recorrido aplica la integración **Fire TV**. Para Android TV, Google TV, Chromecast con
+Google TV o Google TV Streamer, comienza en la [guía de su plataforma](ANDROID-TV-Y-GOOGLE-TV.md).
 
 ## 1. Preparar el ordenador
 
 - macOS/Linux: Python 3.10+ como `python3`. Windows: Python 3.10+ como `python`.
 - Instala [Platform Tools de Android](https://developer.android.com/tools/releases/platform-tools)
   y añade su carpeta a PATH. Comprueba `adb version`.
-- `git clone https://github.com/JoseAlfonsoPC/firelibre.git` y entra en `firelibre`.
+- `git clone https://github.com/JoseAlfonsoPC/tvlibre.git` y entra en `tvlibre`.
 - No necesitas `pip`, root, un cable USB ni modificar el sistema de archivos del TV.
 
-Ejecuta los ejemplos desde la raíz del repositorio. El wrapper `scripts/firelibre.sh` o
-`scripts/firelibre.ps1` también acepta los mismos argumentos; los archivos de estado se guardan
+Ejecuta los ejemplos desde la raíz del repositorio. El wrapper `scripts/tvlibre.sh` o
+`scripts/tvlibre.ps1` también acepta los mismos argumentos; los archivos de estado se guardan
 relativos al directorio desde el que lo ejecutes.
 
 ## 2. Preparar el Fire TV
@@ -34,8 +37,8 @@ Acepta en el televisor «Permitir depuración USB». La conexión debe figurar c
 ## 3. Diagnosticar sin cambiar nada
 
 ```bash
-python3 firelibre.py --serial 192.0.2.10:5555 doctor --out state/doctor.json
-python3 firelibre.py --serial 192.0.2.10:5555 inventory --out state/inventory.json
+python3 tvlibre.py --serial 192.0.2.10:5555 doctor --out state/doctor.json
+python3 tvlibre.py --serial 192.0.2.10:5555 inventory --out state/inventory.json
 ```
 
 Estos archivos son privados. El diagnóstico puede funcionar en equipos que **no** tienen
@@ -44,14 +47,14 @@ autorizada la limpieza. No confundas tener ADB con ser un modelo validado.
 ## 4. Revisar el plan
 
 ```bash
-python3 firelibre.py --serial 192.0.2.10:5555 plan --profile conservador --out state/plan.json
+python3 tvlibre.py --serial 192.0.2.10:5555 plan --profile conservador --out state/plan.json
 ```
 
 El perfil `equilibrado` amplía los candidatos a componentes de compras, avisos, diagnósticos y
 tutoriales. Lee [Paquetes](PAQUETES.md) antes de elegirlo. Puedes conservar candidatos concretos:
 
 ```bash
-python3 firelibre.py --serial 192.0.2.10:5555 plan --profile equilibrado --keep com.amazon.shoptv.client com.amazon.wifilocker --out state/plan.json
+python3 tvlibre.py --serial 192.0.2.10:5555 plan --profile equilibrado --keep com.amazon.shoptv.client com.amazon.wifilocker --out state/plan.json
 ```
 
 El plan registra lo que ya estaba apagado y lo deja así. No supone que todos los modelos tengan
@@ -61,13 +64,13 @@ Los equipos no Android o las versiones fuera de cobertura siguen bloqueados.
 ## 5. Aplicar y comprobar
 
 ```bash
-python3 firelibre.py --serial 192.0.2.10:5555 apply --plan state/plan.json --yes
+python3 tvlibre.py --serial 192.0.2.10:5555 apply --plan state/plan.json --yes
 ```
 
 Guarda la ruta de `backup.json` que aparece antes del primer cambio. Sustituye `RUTA` por ella:
 
 ```bash
-python3 firelibre.py --serial 192.0.2.10:5555 verify --backup RUTA
+python3 tvlibre.py --serial 192.0.2.10:5555 verify --backup RUTA
 ```
 
 Si una orden se rechaza, la ejecución se detiene y conserva lo ya registrado. No intenta

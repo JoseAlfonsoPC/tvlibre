@@ -14,7 +14,7 @@ body:
   - type: input
     id: firmware
     attributes:
-      label: SDK, firmware y versión FireLibre
+      label: SDK, firmware y versión TVLibre
     validations:
       required: true
   - type: textarea

@@ -4,7 +4,7 @@
 
 ## Comparación y alcance
 
-| Launcher | Para qué elegirlo | Integración en FireLibre |
+| Launcher | Para qué elegirlo | Integración en TVLibre |
 |---|---|---|
 | [dumbtv Home](https://github.com/humblemuzzu/dumbtv) | Inicio mínimo, apps, reloj, entradas y opciones; sin permiso de internet | Código español incluido, APK fijado, Guard, prueba de Home y autoinicio |
 | [Projectivy Launcher](https://github.com/spocky/miproja1) | Categorías, canales, fondos y más personalización | Guía manual; no se redistribuye su APK ni se automatiza su accesibilidad |
@@ -23,8 +23,8 @@ Elige un solo controlador de Home; no superpongas servicios de dos launchers.
 Desde la raíz del proyecto:
 
 ```bash
-python3 firelibre.py launcher list
-python3 firelibre.py launcher download --id dumbtv-es --out dist/dumbtv-home-1.6-es.apk
+python3 tvlibre.py launcher list
+python3 tvlibre.py launcher download --id dumbtv-es --out dist/dumbtv-home-1.6-es.apk
 ```
 
 La URL y SHA-256 están fijados en [`integrations/launchers.json`](../integrations/launchers.json).
@@ -43,7 +43,7 @@ dependiendo del proyecto y de la firma; el hash no convierte una descarga en una
 ### 2. Instalar sin activar Home todavía
 
 ```bash
-python3 firelibre.py --serial 192.0.2.10:5555 launcher install --apk dist/dumbtv-home-1.6-es.apk --sha256 85f6b36cf0cd7a65c314b63685116e58ff9a93f8f60f257f55ce75b5ddd096df --yes
+python3 tvlibre.py --serial 192.0.2.10:5555 launcher install --apk dist/dumbtv-home-1.6-es.apk --sha256 85f6b36cf0cd7a65c314b63685116e58ff9a93f8f60f257f55ce75b5ddd096df --yes
 ```
 
 Se usa `adb install -r` y se guarda una copia del APK previo si existía. **No se desinstala
@@ -54,7 +54,7 @@ diario reversible de cambios; no se pasa al comando `restore`.
 ### 3. Activar Home de forma reversible
 
 ```bash
-python3 firelibre.py --serial 192.0.2.10:5555 launcher activate --yes
+python3 tvlibre.py --serial 192.0.2.10:5555 launcher activate --yes
 ```
 
 Guarda la nueva ruta de `backup.json`, que corresponde a **la activación del launcher**.
@@ -69,8 +69,8 @@ No se interpreta una clave escrita en ajustes como prueba de que el servicio fun
 ### 4. Probar Home y autoinicio
 
 ```bash
-python3 firelibre.py --serial 192.0.2.10:5555 launcher verify --test-home
-python3 firelibre.py --serial 192.0.2.10:5555 launcher reboot-check --yes
+python3 tvlibre.py --serial 192.0.2.10:5555 launcher verify --test-home
+python3 tvlibre.py --serial 192.0.2.10:5555 launcher reboot-check --yes
 ```
 
 La primera prueba abre Ajustes, sale de dumbtv y envía Home. La segunda reinicia una sola vez,
@@ -132,7 +132,7 @@ actualización entre ambas. Antes de sustituir una instalación:
 
 La desinstalación borra datos privados, incluido el historial de uso reciente. En Fire OS 8
 ADB puede no permitir respaldar `Android/data`; no prometemos una migración sin pérdida.
-La automatización de FireLibre se detiene ante una firma incompatible.
+La automatización de TVLibre se detiene ante una firma incompatible.
 
 ## Projectivy y otras integraciones
 
@@ -141,5 +141,5 @@ y comprueba la versión mínima de Android. Configura desde su interfaz la susti
 y el arranque, si tu firmware lo permite. No pegues un `enabled_accessibility_services` que
 borre VoiceView u otros servicios. Desactiva primero el controlador anterior y guarda su estado.
 
-Otros launchers pueden instalarse y abrirse sin ser compatibles con Home automático. FireLibre
+Otros launchers pueden instalarse y abrirse sin ser compatibles con Home automático. TVLibre
 no utiliza un remapeador genérico que finja funcionar en cualquier modelo.

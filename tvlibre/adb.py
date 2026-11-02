@@ -8,27 +8,27 @@ import subprocess
 import time
 
 
-class FireLibreError(RuntimeError):
+class TVLibreError(RuntimeError):
     pass
 
 
 class ADB:
     def __init__(self, serial, binary="adb"):
         if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:\[\]-]*", serial):
-            raise FireLibreError("Identificador ADB inválido.")
+            raise TVLibreError("Identificador ADB inválido.")
         self.serial = serial
         self.binary = shutil.which(binary)
         if not self.binary:
-            raise FireLibreError("No se encuentra adb. Instala Android Platform Tools.")
+            raise TVLibreError("No se encuentra adb. Instala Android Platform Tools.")
 
     def run(self, *args, check=True, timeout=40):
         try:
             p = subprocess.run([self.binary, "-s", self.serial, *args],
                                capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout)
         except (OSError, subprocess.TimeoutExpired) as error:
-            raise FireLibreError(f"ADB no ha completado la operación: {error}") from error
+            raise TVLibreError(f"ADB no ha completado la operación: {error}") from error
         if check and p.returncode:
-            raise FireLibreError((p.stderr or p.stdout).strip())
+            raise TVLibreError((p.stderr or p.stdout).strip())
         return p.stdout.strip() if check else p
 
     def shell(self, *args):
@@ -39,13 +39,13 @@ class ADB:
             self.run("connect", self.serial, check=False, timeout=15)
         state = self.run("get-state", check=False)
         if "unauthorized" in state.stderr + state.stdout:
-            raise FireLibreError("Acepta «Permitir depuración USB» en el televisor y repite.")
+            raise TVLibreError("Acepta «Permitir depuración USB» en el televisor y repite.")
         if state.stdout.strip() == "offline" or "offline" in state.stderr:
             self.run("reconnect", check=False)
             time.sleep(1)
             state = self.run("get-state", check=False)
         if state.returncode or state.stdout.strip() != "device":
-            raise FireLibreError("El dispositivo no está conectado. Revisa IP, alimentación y ADB.")
+            raise TVLibreError("El dispositivo no está conectado. Revisa IP, alimentación y ADB.")
 
     def device(self):
         names = {
@@ -76,7 +76,7 @@ class ADB:
         dump = self.shell("dumpsys", "package", package)
         match = re.search(r"User 0:[^\n]*\benabled=(\d+)", dump)
         if not match:
-            raise FireLibreError(f"No se puede leer el estado de {package}.")
+            raise TVLibreError(f"No se puede leer el estado de {package}.")
         return int(match.group(1))
 
     def foreground(self):

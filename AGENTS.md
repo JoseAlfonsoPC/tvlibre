@@ -1,6 +1,8 @@
 # Instrucciones para agentes de código
 
-FireLibre es un proyecto en español para configurar Fire TV con cambios medidos y reversibles.
+TVLibre reúne herramientas y guías para televisores/reproductores Android en español.
+El motor de limpieza 0.1 solo aplica perfiles de Fire TV; Android TV y Google TV tienen
+diagnóstico y guía de integraciones externas. No reutilices perfiles Amazon en esas plataformas.
 
 ## Antes de operar un televisor
 
@@ -34,9 +36,9 @@ FireLibre es un proyecto en español para configurar Fire TV con cambios medidos
 - Las pruebas nunca conectan a un equipo real. Añade pruebas de comportamiento para fallos
   relevantes de planes, cambios y recuperación; no pruebas que simplemente repitan el código.
 - Ejecuta `python3 -m unittest discover -s tests`, `python3 scripts/check_repo.py`,
-  `python3 -m compileall -q firelibre firelibre.py scripts tests` y `bash -n` sobre scripts Bash.
+  `python3 -m compileall -q tvlibre tvlibre.py scripts tests` y `bash -n` sobre scripts Bash.
 - Si cambias Java/recursos, compila el launcher y verifica manifiesto, recursos e idioma.
 - Conserva las licencias y atribuciones de integrations/dumbtv. Sus cambios locales se
-  documentan en UPSTREAM.json; no se atribuye su código original a FireLibre.
+  documentan en UPSTREAM.json; no se atribuye su código original a TVLibre.
 - Las releases pueden incluir APK compilados y hashes; Git no incluye binarios, claves,
   datos reales ni credenciales. No afirmes que un dispositivo fue probado si solo lo simulaste.

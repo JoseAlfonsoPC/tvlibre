@@ -16,9 +16,9 @@ flowchart LR
 ## Organización
 
 ```text
-firelibre/
-├── firelibre.py                 Entrada portable
-├── firelibre/                  Motor, ADB, CLI e integración Home
+tvlibre/
+├── tvlibre.py                 Entrada portable
+├── tvlibre/                  Motor, ADB, CLI e integración Home
 ├── profiles/                   Perfiles y paquetes protegidos
 ├── integrations/
 │   ├── launchers.json           Catálogo fijado de APK y referencias

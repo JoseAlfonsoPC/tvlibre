@@ -9,9 +9,9 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from firelibre.adb import ADB, FireLibreError
-from firelibre import core, launcher
-from firelibre.cli import main
+from tvlibre.adb import ADB, TVLibreError
+from tvlibre import core, launcher
+from tvlibre.cli import main
 
 
 class FakeTV:
@@ -55,7 +55,7 @@ class FakeTV:
                 self.values[namespace][key] = args[offset + 3]
             if key == self.fail_key:
                 self.fail_key = None
-                raise FireLibreError("Corte de conexión después de escribir")
+                raise TVLibreError("Corte de conexión después de escribir")
             return ""
         if args[:3] == ("dumpsys", "deviceidle", "whitelist"):
             if len(args) > 3:
@@ -91,7 +91,7 @@ class Plans(unittest.TestCase):
     def test_interruption_after_write_can_be_recovered(self):
         before = copy.deepcopy((self.tv.states, self.tv.values))
         self.tv.fail_key = "amz_limit_ad_tracking"
-        with self.assertRaises(FireLibreError):
+        with self.assertRaises(TVLibreError):
             core.apply(self.tv, core.make_plan(self.tv), self.temp.name)
         path = next(Path(self.temp.name).glob("*/backup.json"))
         backup = core.read_json(path)
@@ -103,14 +103,14 @@ class Plans(unittest.TestCase):
     def test_different_tv_or_firmware_is_rejected_before_mutation(self):
         plan = core.make_plan(self.tv)
         self.tv.info["identity"] = "another-device"
-        with self.assertRaises(FireLibreError):
+        with self.assertRaises(TVLibreError):
             core.apply(self.tv, plan, self.temp.name)
         self.assertFalse(self.tv.mutations)
 
     def test_drift_is_rejected_before_any_change(self):
         plan = core.make_plan(self.tv)
         self.tv.values["global"]["window_animation_scale"] = "0.75"
-        with self.assertRaises(FireLibreError):
+        with self.assertRaises(TVLibreError):
             core.apply(self.tv, plan, self.temp.name)
         self.assertFalse(self.tv.mutations)
 
@@ -118,20 +118,20 @@ class Plans(unittest.TestCase):
         for package in ("com.amazon.tv.launcher", "com.amazon.device.software.ota", "com.netflix.ninja"):
             plan = core.make_plan(self.tv)
             plan["operations"][0]["package"] = package
-            with self.assertRaises(FireLibreError):
+            with self.assertRaises(TVLibreError):
                 core.apply(self.tv, plan, self.temp.name)
         self.assertFalse(self.tv.mutations)
 
     def test_tampered_plan_cannot_write_arbitrary_setting(self):
         plan = core.make_plan(self.tv)
         plan["operations"].append({"kind": "setting", "namespace": "global", "key": "adb_enabled", "before": "1", "after": "0"})
-        with self.assertRaises(FireLibreError):
+        with self.assertRaises(TVLibreError):
             core.apply(self.tv, plan, self.temp.name)
 
     def test_conflicting_later_change_is_not_overwritten(self):
         path = core.apply(self.tv, core.make_plan(self.tv), self.temp.name)
         self.tv.values["global"]["window_animation_scale"] = "0.75"
-        with self.assertRaises(FireLibreError):
+        with self.assertRaises(TVLibreError):
             core.restore(self.tv, core.read_json(path), path)
         self.assertEqual(self.tv.values["global"]["window_animation_scale"], "0.75")
         self.assertTrue(all(s == 0 for s in self.tv.states.values()))
@@ -139,26 +139,26 @@ class Plans(unittest.TestCase):
     def test_unknown_platform_never_mutates(self):
         for manufacturer, sdk in [("Amazon", 22), ("Amazon", 34), ("Google", 28), ("Amazon", 0)]:
             self.tv.info.update(manufacturer=manufacturer, sdk=sdk)
-            with self.assertRaises(FireLibreError):
+            with self.assertRaises(TVLibreError):
                 core.make_plan(self.tv, experimental=True)
 
     def test_untested_model_requires_explicit_flag(self):
         self.tv.info["model"] = "SYNTHETIC-UNTESTED"
-        with self.assertRaises(FireLibreError):
+        with self.assertRaises(TVLibreError):
             core.make_plan(self.tv)
         self.assertTrue(core.make_plan(self.tv, experimental=True)["experimental"])
 
     def test_other_user_is_read_only(self):
         self.tv.info["user"] = 10
-        with self.assertRaises(FireLibreError):
+        with self.assertRaises(TVLibreError):
             core.make_plan(self.tv)
 
     def test_unexecuted_plan_is_not_a_successful_verification(self):
-        with self.assertRaises(FireLibreError):
+        with self.assertRaises(TVLibreError):
             core.verify(self.tv, core.make_plan(self.tv))
 
     def test_non_object_json_is_rejected(self):
-        with self.assertRaises(FireLibreError):
+        with self.assertRaises(TVLibreError):
             core.validate([])
 
     def test_mid_session_drift_is_preserved(self):
@@ -170,7 +170,7 @@ class Plans(unittest.TestCase):
             adb.values["secure"]["amz_limit_ad_tracking"] = "new-user-choice"
 
         with patch.object(core, "set_value", side_effect=write_and_drift):
-            with self.assertRaises(FireLibreError):
+            with self.assertRaises(TVLibreError):
                 core.apply(self.tv, plan, self.temp.name)
         self.assertEqual(self.tv.values["secure"]["amz_limit_ad_tracking"], "new-user-choice")
 
@@ -186,7 +186,7 @@ class Plans(unittest.TestCase):
 
     def test_projectivy_conflict_is_not_overridden(self):
         self.tv.values["secure"]["enabled_accessibility_services"] = "com.spocky.projengmenu/.Service"
-        with self.assertRaises(FireLibreError):
+        with self.assertRaises(TVLibreError):
             launcher.activation_plan(self.tv)
 
     def test_already_active_launcher_has_no_redundant_writes(self):
@@ -216,7 +216,7 @@ class ParsingAndTransport(unittest.TestCase):
             self.assertIn("'a;$(touch nope)'", command[-1])
 
     def test_invalid_serial(self):
-        with self.assertRaises(FireLibreError):
+        with self.assertRaises(TVLibreError):
             ADB("-H other-device")
 
     def test_legacy_fire_os_settings_list_has_no_user_flag(self):
@@ -227,7 +227,7 @@ class ParsingAndTransport(unittest.TestCase):
             self.assertEqual(run.call_args.args[0][-1], "settings list secure")
 
     def test_mutating_cli_without_yes_never_connects(self):
-        with patch("firelibre.cli.ADB") as adb, patch("sys.stderr", new_callable=io.StringIO):
+        with patch("tvlibre.cli.ADB") as adb, patch("sys.stderr", new_callable=io.StringIO):
             self.assertEqual(main(["--serial", "192.0.2.10:5555", "apply", "--plan", "fake.json"]), 1)
             adb.assert_not_called()
 
@@ -236,7 +236,7 @@ class ParsingAndTransport(unittest.TestCase):
             target = Path(folder) / "launcher.apk"
             entry = {"id": "dumbtv-es", "apk_url": "https://example.invalid/apk", "sha256": "0" * 64}
             with patch.object(launcher, "catalog", return_value=[entry]), patch("urllib.request.urlopen", return_value=io.BytesIO(b"unexpected")):
-                with self.assertRaises(FireLibreError):
+                with self.assertRaises(TVLibreError):
                     launcher.download("dumbtv-es", target)
             self.assertFalse(target.exists())
             self.assertFalse(target.with_suffix(".apk.part").exists())
@@ -244,7 +244,7 @@ class ParsingAndTransport(unittest.TestCase):
     def test_unrecognized_operation_is_rejected(self):
         plan = core.make_plan(FakeTV())
         plan["operations"].append({"kind": "arbitrary-shell", "command": "rm -rf /"})
-        with self.assertRaises(FireLibreError):
+        with self.assertRaises(TVLibreError):
             core.validate(plan)
 
     def test_reboot_observes_autostart_without_launching_or_pressing_home(self):

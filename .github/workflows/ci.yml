@@ -29,7 +29,7 @@ jobs:
       - name: Perfiles, enlaces y traducciones
         run: python scripts/check_repo.py
       - name: Sintaxis Python
-        run: python -m compileall -q firelibre firelibre.py scripts tests
+        run: python -m compileall -q tvlibre tvlibre.py scripts tests
 
   launcher:
     name: Compilación Android y scripts Bash

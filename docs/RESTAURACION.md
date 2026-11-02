@@ -10,8 +10,8 @@ Apunta las rutas completas de las sesiones de limpieza y de activación del laun
 No se reconstruyen los valores anteriores a partir de una lista genérica.
 
 ```bash
-python3 firelibre.py --serial 192.0.2.10:5555 restore --backup state/FECHA-cleanup-ID/backup.json --yes
-python3 firelibre.py --serial 192.0.2.10:5555 verify --backup state/FECHA-cleanup-ID/backup.json
+python3 tvlibre.py --serial 192.0.2.10:5555 restore --backup state/FECHA-cleanup-ID/backup.json --yes
+python3 tvlibre.py --serial 192.0.2.10:5555 verify --backup state/FECHA-cleanup-ID/backup.json
 ```
 
 ## Volver al inicio anterior, conservando la limpieza
@@ -19,7 +19,7 @@ python3 firelibre.py --serial 192.0.2.10:5555 verify --backup state/FECHA-cleanu
 Restaura **la copia de propósito `launcher`**, no la de limpieza:
 
 ```bash
-python3 firelibre.py --serial 192.0.2.10:5555 restore --backup state/FECHA-launcher-ID/backup.json --yes
+python3 tvlibre.py --serial 192.0.2.10:5555 restore --backup state/FECHA-launcher-ID/backup.json --yes
 adb -s 192.0.2.10:5555 shell input keyevent KEYCODE_HOME
 ```
 
@@ -50,13 +50,13 @@ necesitar este comando de restauración.
 - Una sesión en otro equipo o firmware. La identidad y la compilación deben coincidir.
 
 Para un APK, reinstalar una versión anterior puede requerir procedimientos y datos que no
-son reversibles sin pérdida. FireLibre no usa downgrade forzado, borrado de datos ni
+son reversibles sin pérdida. TVLibre no usa downgrade forzado, borrado de datos ni
 desinstalación automática. Consulta [Migración de firma](LAUNCHERS.md#migrar-desde-la-versión-oficial).
 
 ## Si ya había cambios de otras guías
 
-FireLibre guarda el estado que encuentre **al comenzar su propia sesión**. Un paquete ya
-deshabilitado seguirá así al deshacer FireLibre. Para restaurar CleanYourTV, dumbtv u otra
+TVLibre guarda el estado que encuentre **al comenzar su propia sesión**. Un paquete ya
+deshabilitado seguirá así al deshacer TVLibre. Para restaurar CleanYourTV, dumbtv u otra
 guía anterior necesitas sus copias y herramientas originales.
 
 ## Tras una actualización de Fire OS

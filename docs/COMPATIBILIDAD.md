@@ -15,8 +15,10 @@ comercial como única prueba: generaciones, regiones y revisiones pueden llevar 
 | Amazon SDK 28, otros modelos | Sí | Solo `--experimental` | Solo prueba explícita; depende del firmware |
 | Amazon SDK 29/30 | Sí | Solo `--experimental` | Guard experimental; puede ser rechazado |
 | Amazon SDK 22, Fire OS 5 | Si ADB responde | Bloqueada | APK integrado requiere SDK 25 mínimo |
-| SDK 31 o superior | Si ADB responde | Bloqueada en 0.1 | Sin ruta validada en FireLibre |
+| SDK 31 o superior | Si ADB responde | Bloqueada en 0.1 | Sin ruta validada en TVLibre |
 | Android TV / Google TV | Si ADB responde | Bloqueada | Referencias externas, sin automatización propia |
+| Chromecast con Google TV / Google TV Streamer | Si ADB responde | Sin perfil propio | Guía específica e integraciones externas |
+| Chromecast clásico, Ultra o Audio | Sin ruta compatible aquí | No | No se instala un launcher Android con este proyecto |
 | Vega OS u otros sistemas sin Android | No con este motor | No | No |
 
 Según la [documentación oficial de Amazon](https://developer.amazon.com/docs/fire-tv/fire-os-overview.html),
@@ -29,13 +31,13 @@ Vega OS. Revisa la tabla oficial para identificar cada modelo.
 **Fire TV Stick de 3.ª generación, modelo AFTSSS / sheldonp**, Android 9, firmware de referencia
 `PS7708.5501N`:
 
-- En una configuración anterior a FireLibre se deshabilitaron los 33 candidatos del perfil
+- En una configuración anterior a TVLibre se deshabilitaron los 33 candidatos del perfil
   ampliado, en dos etapas, y se comprobó que el TV volviera al inicio.
 - dumbtv Home 1.6 y la traducción 1.6-es funcionaron; el launcher español arrancó tras reiniciar.
 - Home físico se confirmó con dumbtv oficial; en la traducción se comprobó el retorno por ADB.
 - Se comprobó apertura de Prime Video, Netflix y YouTube. No se verificaron reproducción,
   sesión de voz Alexa ni duplicación real. Conservar paquetes no demuestra esas funciones.
-- El **motor Python nuevo** de FireLibre se comprueba con simulación de cambios y recuperación,
+- El **motor Python nuevo** de TVLibre se comprueba con simulación de cambios y recuperación,
   y diagnóstico/plan de solo lectura sobre el dispositivo real. No se ha aplicado ni restaurado
   una sesión de este motor en hardware en la versión inicial.
 

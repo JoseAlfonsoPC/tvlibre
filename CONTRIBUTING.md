@@ -1,4 +1,4 @@
-# Contribuir a FireLibre
+# Contribuir a TVLibre
 
 Gracias por aportar evidencia, código o documentación. Las contribuciones se publican bajo
 la licencia del proyecto, respetando las licencias de código integrado.
@@ -20,7 +20,7 @@ que se documenten los resultados relevantes.
 ```bash
 python3 -m unittest discover -s tests
 python3 scripts/check_repo.py
-python3 -m compileall -q firelibre firelibre.py scripts tests
+python3 -m compileall -q tvlibre tvlibre.py scripts tests
 for script in scripts/*.sh integrations/dumbtv/build.sh; do bash -n "$script"; done
 ```
 

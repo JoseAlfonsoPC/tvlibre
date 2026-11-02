@@ -82,7 +82,7 @@ que se decidió conservar. No es un inventario completo de todos los paquetes es
 todos los Fire TV. Además, el motor solo permite actuar sobre los candidatos del perfil.
 
 Los servicios protegidos por Amazon, como métricas de dispositivo o crash manager, se
-excluyen de la limpieza automatizada. FireLibre no intenta conseguir root ni desinstalarlos.
+excluyen de la limpieza automatizada. TVLibre no intenta conseguir root ni desinstalarlos.
 Las apps personales ajenas a los perfiles se conservan aunque no estén en protegidos.json.
 
 ## Mantener las listas

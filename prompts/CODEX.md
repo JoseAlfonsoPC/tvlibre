@@ -1,4 +1,4 @@
-# Prompt para configurar un Fire TV con Codex
+# Prompt para configurar un televisor o reproductor con Codex
 
 Clona este repositorio y ábrelo como carpeta de trabajo en Codex. Sustituye la IP del ejemplo
 y revisa las preferencias. Pega el bloque completo como **tu petición**, no solo un enlace.
@@ -6,11 +6,12 @@ El ordenador de Codex debe poder acceder a tu red local; una ejecución remota e
 alcanza automáticamente tu Stick.
 
 ```text
-Quiero configurar MI Fire TV con FireLibre. Lee AGENTS.md y las guías del repositorio.
+Quiero configurar MI televisor o reproductor con TVLibre. Lee AGENTS.md y las guías del repositorio.
 
 DISPOSITIVO
 - Dirección ADB: 192.0.2.10:5555 (sustitúyela por la IP real antes de empezar).
 - Modelo que creo tener: [modelo, o «identificar»].
+- Familia: [Fire TV / Android TV / Google TV / Chromecast con Google TV / identificar].
 
 MIS PREFERENCIAS
 - Perfil: conservador. Puedes usar equilibrado solo si lo cambio aquí explícitamente.
@@ -39,6 +40,10 @@ PROCEDIMIENTO
    Android con Vega OS ni la 3.ª generación normal con una 4K de otra generación.
 3. Si el modelo requiere --experimental, termina el diagnóstico y explícame ese límite.
    No actives el modo experimental sin una petición explícita mía.
+   Si es Android TV, Google TV, Chromecast con Google TV o Google TV Streamer, usa
+   docs/ANDROID-TV-Y-GOOGLE-TV.md: el motor actual no tiene un perfil de limpieza
+   para esas plataformas. Entrega el diagnóstico y el recorrido recomendado;
+   no ejecutes las etapas Fire TV siguientes ni apliques paquetes de Amazon.
 4. Genera el plan con el perfil indicado y mis paquetes conservados. Resume las
    operaciones previstas, revísalas frente a profiles/protegidos.json y aplícalas con --yes
    dentro de la autorización anterior. No inventes órdenes ni paquetes nuevos.

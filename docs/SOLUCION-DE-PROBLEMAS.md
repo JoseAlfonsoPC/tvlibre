@@ -22,6 +22,6 @@
 
 ## Informar de un fallo
 
-Incluye versión FireLibre, modelo, SDK, firmware, comando sin IP y mensaje de error resumido.
+Incluye versión TVLibre, modelo, SDK, firmware, comando sin IP y mensaje de error resumido.
 Indica si lo reprodujiste antes y después de restaurar. No adjuntes `state/`, volcados completos
 de ajustes, claves, IP, cuentas ni capturas que los muestren. Utiliza las plantillas de incidencias.

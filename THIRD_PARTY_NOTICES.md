@@ -6,7 +6,7 @@
 - Fuente: https://github.com/humblemuzzu/dumbtv
 - Código integrado en `integrations/dumbtv/`, revisión y modificaciones en `UPSTREAM.json`.
 - Licencia completa conservada en [integrations/dumbtv/LICENSE](integrations/dumbtv/LICENSE).
-- Adaptación local al español: FireLibre / JoseAlfonsoPC. La autoría original se mantiene.
+- Adaptación local al español: TVLibre / JoseAlfonsoPC. La autoría original se mantiene.
 
 ## CleanYourTV
 
@@ -53,6 +53,6 @@ se incorporan su tipografía Outfit ni sus recursos de terceros.
 - NetGuard: https://github.com/M66B/NetGuard
 - personalDNSfilter: https://github.com/IngoZenz/personaldnsfilter
 
-Cada proyecto conserva su licencia, marcas y condiciones. FireLibre no incluye sus APK
+Cada proyecto conserva su licencia, marcas y condiciones. TVLibre no incluye sus APK
 ni atribuye su creación al mantenedor de este repositorio. Los iconos de las apps visibles
 en un launcher los aporta cada aplicación instalada.

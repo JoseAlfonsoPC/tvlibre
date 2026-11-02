@@ -4,11 +4,11 @@ import argparse
 import json
 import sys
 from . import __version__, core, launcher
-from .adb import ADB, FireLibreError
+from .adb import ADB, TVLibreError
 
 
 def parser():
-    p = argparse.ArgumentParser(description="FireLibre — privacidad y launcher reversible para Fire TV")
+    p = argparse.ArgumentParser(description="TVLibre — diagnóstico Android TV y herramientas reversibles para Fire TV")
     p.add_argument("--version", action="version", version=__version__)
     p.add_argument("--serial", help="IP:5555 o identificador ADB. Obligatorio para acceder al TV.")
     p.add_argument("--adb", default="adb", help="Ruta de Android Platform Tools/adb")
@@ -74,7 +74,7 @@ def main(argv=None):
         if not args.serial:
             p.error("indica --serial antes del comando; no se elige un dispositivo por defecto")
         if hasattr(args, "yes") and not args.yes:
-            raise FireLibreError("Revisa el plan o la guía y añade --yes para ejecutar esta operación.")
+            raise TVLibreError("Revisa el plan o la guía y añade --yes para ejecutar esta operación.")
         adb = ADB(args.serial, args.adb)
         adb.connect()
         if args.command == "doctor":
@@ -82,7 +82,7 @@ def main(argv=None):
             try:
                 core.supported(device)
                 status = "Modelo de referencia AFTSSS; consulta la cobertura de pruebas en docs/COMPATIBILIDAD.md"
-            except FireLibreError as error:
+            except TVLibreError as error:
                 status = str(error)
             emit({"device": device, "compatibility": status, "mode": "solo lectura"}, args.out)
         elif args.command == "inventory":
@@ -113,7 +113,7 @@ def main(argv=None):
             emit(result)
             return 0 if result["autostart"] else 1
         return 0
-    except (FireLibreError, OSError, ValueError, KeyError, TypeError) as error:
+    except (TVLibreError, OSError, ValueError, KeyError, TypeError) as error:
         print("Error:", error, file=sys.stderr)
         return 1
     except KeyboardInterrupt:

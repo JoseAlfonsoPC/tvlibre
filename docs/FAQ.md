@@ -37,12 +37,12 @@ con nombres parecidos pueden llevar otro Android o Vega OS. Consulta [Compatibil
 
 ## ¿Por qué el launcher sigue llamándose dumbtv?
 
-Porque es su código y conserva su autoría. FireLibre aporta el proyecto, las herramientas y
+Porque es su código y conserva su autoría. TVLibre aporta el proyecto, las herramientas y
 la traducción. Las aplicaciones externas y sus logotipos mantienen sus nombres originales.
 
 ## ¿Por qué no se actualiza la traducción encima de la versión oficial?
 
-Las firmas son distintas. Android impide ese reemplazo sin desinstalar. FireLibre se detiene
+Las firmas son distintas. Android impide ese reemplazo sin desinstalar. TVLibre se detiene
 y explica la [migración](LAUNCHERS.md#migrar-desde-la-versión-oficial), incluida la pérdida del
 historial privado que puede ocasionar. No borra automáticamente la instalación.
 
@@ -54,7 +54,7 @@ los permisos del ordenador ni las restricciones del firmware.
 
 ## ¿Puedo quitar Netflix, Music u otras apps?
 
-Puedes ocultarlas en el launcher o retirar apps instaladas desde Ajustes. FireLibre no incluye
+Puedes ocultarlas en el launcher o retirar apps instaladas desde Ajustes. TVLibre no incluye
 una desinstalación masiva y conserva las apps del usuario. No se deduce un paquete del nombre
 sin comprobarlo en tu dispositivo.
 

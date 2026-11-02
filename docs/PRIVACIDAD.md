@@ -10,7 +10,7 @@ estados de paquetes y ajustes. **No captura tráfico ni demuestra que Amazon hay
 recibir todos los datos.** Algunos servicios están protegidos, siguen en ejecución o se
 sincronizan con la cuenta.
 
-FireLibre mantiene actualizaciones, Alexa, streaming y duplicación por defecto. No confunde
+TVLibre mantiene actualizaciones, Alexa, streaming y duplicación por defecto. No confunde
 reducir datos con bloquear toda la conectividad de Amazon. Tampoco anuncia una aceleración
 o ahorro de RAM que no se haya medido.
 
@@ -27,7 +27,7 @@ requisitos actuales. No se distribuyen sus binarios ni se instala un servicio de
 NetGuard y un filtro DNS con VPN local normalmente compiten por la misma VPN de Android;
 no actives ambos a la vez suponiendo que se acumulan sus protecciones.
 
-La experiencia de la guía de JLCareglio inspira esta opción, pero FireLibre no copia su bloqueo
+La experiencia de la guía de JLCareglio inspira esta opción, pero TVLibre no copia su bloqueo
 de actualizaciones ni su borrado de datos. Si mantienes OTA, no importes sin revisar una lista
 que incluya servidores de actualización. Las listas de dumbtv pueden bloquearlos deliberadamente.
 
@@ -35,7 +35,7 @@ que incluya servidores de actualización. Las listas de dumbtv pueden bloquearlo
 
 `RUN_IN_BACKGROUND`, `RUN_ANY_IN_BACKGROUND` y las políticas de red por UID no equivalen a
 un firewall universal. Una política para redes medidas puede no afectar a tu Wi-Fi. Varias
-apps pueden compartir UID y resultar afectadas juntas. Por eso FireLibre 0.1 no aplica esas
+apps pueden compartir UID y resultar afectadas juntas. Por eso TVLibre 0.1 no aplica esas
 restricciones a servicios protegidos ni cambia Data Saver global como supuesto bloqueo total.
 
 ## Los menús de Amazon importan
@@ -51,5 +51,5 @@ las claves se excluyen de Git. Las incidencias necesitan modelo, SDK, firmware y
 resumidos; no necesitan IP, MAC, número de serie, nombres de Wi-Fi, cuentas ni copias completas.
 
 ADB da acceso amplio al televisor a los ordenadores autorizados. Úsalo en una red de confianza
-y decide si lo dejas activo al terminar. FireLibre no abre puertos del router ni elimina tus
+y decide si lo dejas activo al terminar. TVLibre no abre puertos del router ni elimina tus
 autorizaciones automáticamente.

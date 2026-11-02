@@ -7,7 +7,7 @@ import os
 import re
 import uuid
 
-from .adb import FireLibreError
+from .adb import TVLibreError
 
 ROOT = Path(__file__).resolve().parent.parent
 PACKAGE = "tv.dumbtv.home"
@@ -19,7 +19,7 @@ def read_json(path):
     try:
         return json.loads(Path(path).read_text(encoding="utf-8"))
     except (OSError, ValueError) as error:
-        raise FireLibreError(f"No se puede leer el JSON {path}: {error}") from error
+        raise TVLibreError(f"No se puede leer el JSON {path}: {error}") from error
 
 
 def write_json(path, data):
@@ -38,23 +38,23 @@ def write_json(path, data):
 
 def profile(name):
     if name not in PROFILES:
-        raise FireLibreError("Perfil desconocido.")
+        raise TVLibreError("Perfil desconocido.")
     return read_json(ROOT / "profiles" / (name + ".json"))
 
 
 def supported(device, experimental=False):
     if not device.get("identity") or device.get("user") != 0:
-        raise FireLibreError("Se necesita identidad estable y usuario principal 0 para cambiar el TV.")
+        raise TVLibreError("Se necesita identidad estable y usuario principal 0 para cambiar el TV.")
     if not device["manufacturer"].lower().startswith("amazon") or device["sdk"] not in (25, 28, 29, 30):
-        raise FireLibreError("Esta plataforma solo permite diagnóstico en FireLibre 0.1. Lee Compatibilidad.")
+        raise TVLibreError("Esta plataforma solo permite diagnóstico en TVLibre 0.1. Lee Compatibilidad.")
     if (device["model"], device["sdk"]) != ("AFTSSS", 28) and not experimental:
-        raise FireLibreError("Modelo pendiente de validar. Solo diagnóstico; --experimental habilita una prueba explícita.")
+        raise TVLibreError("Modelo pendiente de validar. Solo diagnóstico; --experimental habilita una prueba explícita.")
 
 
 def same_device(expected, actual):
     for key in ("identity", "model", "sdk", "build", "user"):
         if expected.get(key) != actual.get(key):
-            raise FireLibreError(f"El dispositivo o firmware ha cambiado ({key}). No se aplicará este archivo.")
+            raise TVLibreError(f"El dispositivo o firmware ha cambiado ({key}). No se aplicará este archivo.")
 
 
 def protected_packages():
@@ -89,7 +89,7 @@ def make_plan(adb, name="equilibrado", keep=(), experimental=False):
                 operations.append({"kind": "package", "package": pkg, "before": before,
                                    "after": 3, "reason": item["reason"]})
             else:
-                raise FireLibreError(f"Estado de paquete desconocido: {pkg}: {before}")
+                raise TVLibreError(f"Estado de paquete desconocido: {pkg}: {before}")
     namespaces = {n: adb.settings(n) for n in ("secure", "global")}
     for item in rules["settings"]:
         before = namespaces[item["namespace"]].get(item["key"])
@@ -105,15 +105,15 @@ def make_plan(adb, name="equilibrado", keep=(), experimental=False):
 
 def validate(document):
     if not isinstance(document, dict) or document.get("schema") != 1 or document.get("purpose") not in ("cleanup", "launcher"):
-        raise FireLibreError("Esquema o propósito de archivo desconocido.")
+        raise TVLibreError("Esquema o propósito de archivo desconocido.")
     if not isinstance(document.get("experimental"), bool):
-        raise FireLibreError("Falta el indicador de compatibilidad experimental.")
+        raise TVLibreError("Falta el indicador de compatibilidad experimental.")
     device = document.get("device", {})
     if not isinstance(device, dict) or not device.get("identity") or device.get("user") != 0:
-        raise FireLibreError("El archivo no identifica un dispositivo.")
+        raise TVLibreError("El archivo no identifica un dispositivo.")
     operations = document.get("operations")
     if not isinstance(operations, list):
-        raise FireLibreError("Falta la lista de operaciones.")
+        raise TVLibreError("Falta la lista de operaciones.")
     rules = profile(document["profile"]) if document["purpose"] == "cleanup" else None
     packages = {p["id"] for p in rules["packages"]} if rules else set()
     settings = {(s["namespace"], s["key"]): s["value"] for s in rules["settings"]} if rules else {}
@@ -123,12 +123,12 @@ def validate(document):
         if kind == "package":
             pkg = op.get("package", "")
             if pkg not in packages or pkg in protected_packages() or op.get("before") not in (0, 1) or op.get("after") != 3:
-                raise FireLibreError("El plan intenta cambiar un paquete fuera del perfil permitido.")
+                raise TVLibreError("El plan intenta cambiar un paquete fuera del perfil permitido.")
             key = (kind, pkg)
         elif kind == "setting":
             ns, name, value = op.get("namespace"), op.get("key"), op.get("after")
             if op.get("before") is not None and not isinstance(op["before"], str):
-                raise FireLibreError("Valor anterior de ajuste inválido.")
+                raise TVLibreError("Valor anterior de ajuste inválido.")
             allowed = (ns, name) in settings and settings[(ns, name)] == value
             if document["purpose"] == "launcher":
                 before = op.get("before")
@@ -141,16 +141,16 @@ def validate(document):
                     parts = [s for s in (before or "").split(",") if s and not s.startswith("min_futurity=")]
                     allowed = value == ",".join(parts + ["min_futurity=0"])
             if not allowed:
-                raise FireLibreError("El plan intenta cambiar un ajuste fuera de la política.")
+                raise TVLibreError("El plan intenta cambiar un ajuste fuera de la política.")
             key = (kind, ns, name)
         elif kind == "whitelist" and document["purpose"] == "launcher":
             if op.get("package") != PACKAGE or not isinstance(op.get("before"), bool) or op.get("after") is not True:
-                raise FireLibreError("Exención de batería inválida.")
+                raise TVLibreError("Exención de batería inválida.")
             key = (kind, PACKAGE)
         else:
-            raise FireLibreError("Tipo de operación desconocido.")
+            raise TVLibreError("Tipo de operación desconocido.")
         if key in seen:
-            raise FireLibreError("Operación duplicada en el plan.")
+            raise TVLibreError("Operación duplicada en el plan.")
         seen.add(key)
 
 
@@ -162,7 +162,7 @@ def current(adb, op):
     if op["kind"] == "whitelist":
         raw = adb.shell("dumpsys", "deviceidle", "whitelist")
         return any(line.split(",")[1:2] == [op["package"]] for line in raw.splitlines())
-    raise FireLibreError("Operación desconocida.")
+    raise TVLibreError("Operación desconocida.")
 
 
 def set_value(adb, op, value):
@@ -172,7 +172,7 @@ def set_value(adb, op, value):
     elif op["kind"] == "setting":
         if value is None:
             if adb.device()["user"] != 0:
-                raise FireLibreError("El usuario activo cambió; no se eliminará el ajuste.")
+                raise TVLibreError("El usuario activo cambió; no se eliminará el ajuste.")
             adb.shell("settings", "delete", op["namespace"], op["key"])
         else:
             adb.shell("settings", "--user", "0", "put", op["namespace"], op["key"], value)
@@ -195,7 +195,7 @@ def apply(adb, plan, directory="state"):
     same_device(plan["device"], actual)
     for op in plan["operations"]:
         if current(adb, op) != op["before"]:
-            raise FireLibreError("El estado ha cambiado desde el plan. Genera otro antes de continuar.")
+            raise TVLibreError("El estado ha cambiado desde el plan. Genera otro antes de continuar.")
     path = journal_path(directory, plan["purpose"])
     backup = {**plan, "status": "applying", "operations": [dict(op, attempted=False) for op in plan["operations"]]}
     write_json(path, backup)
@@ -203,12 +203,12 @@ def apply(adb, plan, directory="state"):
     try:
         for op in backup["operations"]:
             if current(adb, op) != op["before"]:
-                raise FireLibreError("El estado cambió durante la sesión; no se sobrescribirá ese cambio.")
+                raise TVLibreError("El estado cambió durante la sesión; no se sobrescribirá ese cambio.")
             op["attempted"] = True
             write_json(path, backup)  # Primero se registra; después se cambia el dispositivo.
             set_value(adb, op, op["after"])
             if current(adb, op) != op["after"]:
-                raise FireLibreError(f"El sistema no aceptó el cambio: {op.get('package', op.get('key'))}")
+                raise TVLibreError(f"El sistema no aceptó el cambio: {op.get('package', op.get('key'))}")
             op["applied"] = True
             write_json(path, backup)
             print("Aplicado:", op.get("package", op.get("key")), flush=True)
@@ -241,16 +241,16 @@ def restore(adb, backup, path):
             try:
                 set_value(adb, op, op["before"])
                 if current(adb, op) != op["before"]:
-                    raise FireLibreError("El valor restaurado no coincide.")
+                    raise TVLibreError("El valor restaurado no coincide.")
                 op["restored"] = True
-            except FireLibreError as error:
+            except TVLibreError as error:
                 conflicts.append(op.get("package", op.get("key")))
                 op["restore_error"] = str(error)
         write_json(path, backup)
     backup["status"] = "restore-conflicts" if conflicts else "restored"
     write_json(path, backup)
     if conflicts:
-        raise FireLibreError("Restauración parcial; hay cambios posteriores o errores en: " + ", ".join(conflicts))
+        raise TVLibreError("Restauración parcial; hay cambios posteriores o errores en: " + ", ".join(conflicts))
     return backup
 
 
@@ -272,6 +272,6 @@ def verify(adb, backup):
 
 def require_journal(backup):
     if backup.get("status") not in ("applying", "applied", "interrupted", "restored", "restore-conflicts"):
-        raise FireLibreError("Se necesita un diario backup.json generado al aplicar, no un plan sin ejecutar.")
+        raise TVLibreError("Se necesita un diario backup.json generado al aplicar, no un plan sin ejecutar.")
     if any(not isinstance(op.get("attempted"), bool) for op in backup["operations"]):
-        raise FireLibreError("El diario no registra correctamente las operaciones intentadas.")
+        raise TVLibreError("El diario no registra correctamente las operaciones intentadas.")

@@ -7,7 +7,7 @@ import re
 import time
 import urllib.request
 
-from .adb import FireLibreError
+from .adb import TVLibreError
 from . import core
 
 
@@ -27,14 +27,14 @@ def download(identifier, destination):
     entries = {entry["id"]: entry for entry in catalog()}
     entry = entries.get(identifier)
     if not entry or "sha256" not in entry:
-        raise FireLibreError("Esa integración solo tiene guía manual o no está en el catálogo.")
+        raise TVLibreError("Esa integración solo tiene guía manual o no está en el catálogo.")
     target = Path(destination)
     if target.exists():
-        raise FireLibreError("El destino ya existe. Elige otro para no sobrescribirlo.")
+        raise TVLibreError("El destino ya existe. Elige otro para no sobrescribirlo.")
     target.parent.mkdir(parents=True, exist_ok=True)
     partial = target.with_suffix(target.suffix + ".part")
     try:
-        request = urllib.request.Request(entry["apk_url"], headers={"User-Agent": "FireLibre/0.1"})
+        request = urllib.request.Request(entry["apk_url"], headers={"User-Agent": "TVLibre/0.1"})
         with urllib.request.urlopen(request, timeout=45) as response, partial.open("wb") as f:
             count = 0
             while True:
@@ -43,10 +43,10 @@ def download(identifier, destination):
                     break
                 count += len(block)
                 if count > 30 * 1024 * 1024:
-                    raise FireLibreError("Descarga inesperadamente grande; se ha detenido.")
+                    raise TVLibreError("Descarga inesperadamente grande; se ha detenido.")
                 f.write(block)
         if checksum(partial) != entry["sha256"]:
-            raise FireLibreError("SHA-256 incorrecto. El APK descargado no se instalará.")
+            raise TVLibreError("SHA-256 incorrecto. El APK descargado no se instalará.")
         os.replace(partial, target)
     finally:
         partial.unlink(missing_ok=True)
@@ -55,12 +55,12 @@ def download(identifier, destination):
 
 def install(adb, apk, sha256, directory="state", experimental=False):
     if not re.fullmatch(r"[0-9a-fA-F]{64}", sha256) or checksum(apk) != sha256.lower():
-        raise FireLibreError("El SHA-256 esperado no coincide con el APK.")
+        raise TVLibreError("El SHA-256 esperado no coincide con el APK.")
     device = adb.device()
     core.supported(device, experimental)
     # Solo APK fijados del catálogo: no se usa un archivo desconocido como integración.
     if sha256.lower() not in {x.get("sha256") for x in catalog()}:
-        raise FireLibreError("APK fuera del catálogo. Compilaciones propias: usa adb install -r tras revisar su manifiesto.")
+        raise TVLibreError("APK fuera del catálogo. Compilaciones propias: usa adb install -r tras revisar su manifiesto.")
     path = core.journal_path(directory, "launcher-install")
     info = {"schema": 1, "device": device, "action": "install-apk", "sha256": sha256.lower(),
             "note": "Este registro no desinstala apps ni revierte versiones. Lee docs/RESTAURACION.md."}
@@ -73,9 +73,9 @@ def install(adb, apk, sha256, directory="state", experimental=False):
     print(f"Registro de instalación: {path}")
     result = adb.run("install", "-r", str(Path(apk).resolve()), check=False, timeout=120)
     if result.returncode or "Success" not in result.stdout:
-        raise FireLibreError("No se instaló el APK. Si la firma es distinta, conserva la app y revisa la guía de migración.\n" + result.stdout + result.stderr)
+        raise TVLibreError("No se instaló el APK. Si la firma es distinta, conserva la app y revisa la guía de migración.\n" + result.stdout + result.stderr)
     if core.PACKAGE not in adb.packages():
-        raise FireLibreError("La instalación no corresponde al launcher esperado.")
+        raise TVLibreError("La instalación no corresponde al launcher esperado.")
     print("dumbtv instalado. La activación de Home es un paso separado.")
 
 
@@ -103,13 +103,13 @@ def activation_plan(adb, experimental=False):
     device = adb.device()
     core.supported(device, experimental)
     if device["sdk"] < 28:
-        raise FireLibreError("Fire OS 6 requiere Keeper. FireLibre no automatiza esa ruta; consulta el proyecto dumbtv.")
+        raise TVLibreError("Fire OS 6 requiere Keeper. TVLibre no automatiza esa ruta; consulta el proyecto dumbtv.")
     if core.PACKAGE not in adb.packages():
-        raise FireLibreError("Instala dumbtv antes de activar Home.")
+        raise TVLibreError("Instala dumbtv antes de activar Home.")
     secure, global_ = adb.settings("secure"), adb.settings("global")
     services = [x for x in secure.get("enabled_accessibility_services", "").split(":") if x]
     if any("com.spocky.projengmenu" in x for x in services):
-        raise FireLibreError("Projectivy ya controla Home. Desactiva su redirección en sus ajustes antes de activar dumbtv.")
+        raise TVLibreError("Projectivy ya controla Home. Desactiva su redirección en sus ajustes antes de activar dumbtv.")
     operations = []
     if core.GUARD not in services and core.PACKAGE + "/.Guard" not in services:
         operations.append({"kind": "setting", "namespace": "secure", "key": "enabled_accessibility_services",
@@ -139,7 +139,7 @@ def activate(adb, directory="state", experimental=False):
             break
         time.sleep(1)
     else:
-        raise FireLibreError(f"Fire OS no vinculó Guard. No se da Home por configurado. Restaura con --backup {path}")
+        raise TVLibreError(f"Fire OS no vinculó Guard. No se da Home por configurado. Restaura con --backup {path}")
     adb.shell("input", "keyevent", "KEYCODE_WAKEUP")
     adb.shell("am", "start", "-n", core.PACKAGE + "/.Home")
     return path
@@ -160,7 +160,7 @@ def verify(adb, test_home=False, experimental=False):
         time.sleep(2)
         away = adb.foreground()
         if not away or away.startswith(core.PACKAGE + "/"):
-            raise FireLibreError("No se pudo salir del launcher; no se puede probar Home desde otra app.")
+            raise TVLibreError("No se pudo salir del launcher; no se puede probar Home desde otra app.")
         adb.shell("input", "keyevent", "KEYCODE_HOME")
         result["home_key"] = False
         for _ in range(8):
@@ -200,6 +200,6 @@ def reboot_check(adb, experimental=False):
             return {"boot_changed": True, "first_foreground_observed": first,
                     "foreground_before_any_launch": foreground,
                     "autostart": bool(foreground and foreground.startswith(core.PACKAGE + "/"))}
-        except FireLibreError:
+        except TVLibreError:
             continue
-    raise FireLibreError("No se ha podido comprobar el arranque en 180 segundos. Revisa el TV; no se reiniciará otra vez.")
+    raise TVLibreError("No se ha podido comprobar el arranque en 180 segundos. Revisa el TV; no se reiniciará otra vez.")

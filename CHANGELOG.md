@@ -2,7 +2,9 @@
 
 ## 0.1.0 — 2026-11-02
 
-- Proyecto FireLibre e identidad propia, de JoseAlfonsoPC.
+- Proyecto TVLibre e identidad propia, de JoseAlfonsoPC.
+- Nombre y comandos generales TVLibre, con guía específica para Android TV, Google TV y
+  Chromecast con Google TV; los perfiles de limpieza siguen limitados a Fire TV en esta versión.
 - CLI Python 3.10+ sin dependencias: diagnóstico, inventario, plan, aplicación, verificación
   y recuperación por sesión.
 - Perfil conservador de 8 candidatos y equilibrado de 33, con 70 paquetes protegidos.
